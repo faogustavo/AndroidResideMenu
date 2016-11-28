@@ -1,6 +1,7 @@
 package com.special.ResideMenu;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,20 @@ public class ResideMenuItem extends LinearLayout{
         tv_title.setText(title);
     }
 
+    public ResideMenuItem(Context context, Drawable icon, int title) {
+        super(context);
+        initViews(context);
+        iv_icon.setImageDrawable(icon);
+        tv_title.setText(title);
+    }
+
+    public ResideMenuItem(Context context, Drawable icon, String title) {
+        super(context);
+        initViews(context);
+        iv_icon.setImageDrawable(icon);
+        tv_title.setText(title);
+    }
+
     private void initViews(Context context){
         LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.residemenu_item, this);
@@ -47,12 +62,21 @@ public class ResideMenuItem extends LinearLayout{
     }
 
     /**
-     * set the icon color;
+     * set the icon resource;
      *
      * @param icon
      */
     public void setIcon(int icon){
         iv_icon.setImageResource(icon);
+    }
+
+    /**
+     * set the icon drawable;
+     *
+     * @param icon
+     */
+    public void setIcon(Drawable icon){
+        iv_icon.setImageDrawable(icon);
     }
 
     /**
