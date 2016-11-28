@@ -2,6 +2,7 @@ package com.special.ResideMenu;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,6 +55,30 @@ public class ResideMenuItem extends LinearLayout{
         tv_title.setText(title);
     }
 
+    public ResideMenuItem(Context context, String icon, int title) {
+        super(context);
+        initViews(context);
+
+        tv_title.setText(title);
+        if (ResideMenu.imageLoader != null) {
+            ResideMenu.imageLoader.loadFromUrl(icon, iv_icon);
+        } else {
+            Log.e(ResideMenu.class.getName(), "ImageLoader not defined.");
+        }
+    }
+
+    public ResideMenuItem(Context context, String icon, String title) {
+        super(context);
+        initViews(context);
+
+        tv_title.setText(title);
+        if (ResideMenu.imageLoader != null) {
+            ResideMenu.imageLoader.loadFromUrl(icon, iv_icon);
+        } else {
+            Log.e(ResideMenu.class.getName(), "ImageLoader not defined.");
+        }
+    }
+
     private void initViews(Context context){
         LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.residemenu_item, this);
@@ -77,6 +102,19 @@ public class ResideMenuItem extends LinearLayout{
      */
     public void setIcon(Drawable icon){
         iv_icon.setImageDrawable(icon);
+    }
+
+    /**
+     * set the icon url;
+     *
+     * @param icon
+     */
+    public void setIcon(String icon){
+        if (ResideMenu.imageLoader != null) {
+            ResideMenu.imageLoader.loadFromUrl(icon, iv_icon);
+        } else {
+            Log.e(ResideMenu.class.getName(), "ImageLoader not defined.");
+        }
     }
 
     /**

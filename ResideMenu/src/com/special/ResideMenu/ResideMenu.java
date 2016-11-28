@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.*;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
@@ -74,6 +75,7 @@ public class ResideMenu extends FrameLayout {
 
     private boolean mUse3D;
     private static final int ROTATE_Y_ANGLE = 10;
+    public static ImageLoader imageLoader;
 
     public ResideMenu(Context context) {
         super(context);
@@ -215,6 +217,13 @@ public class ResideMenu extends FrameLayout {
      */
     public void setBackground(int imageResource) {
         imageViewBackground.setImageResource(imageResource);
+    }
+    public void setBackground(String imageUrl) {
+        if (imageLoader != null) {
+            imageLoader.loadFromUrl(imageUrl, imageViewBackground);
+        } else {
+            Log.e(ResideMenu.class.getName(), "ImageLoader not defined.");
+        }
     }
 
     /**
@@ -694,6 +703,10 @@ public class ResideMenu extends FrameLayout {
          * This method will be called at the finished time of closing menu animations.
          */
         public void closeMenu();
+    }
+
+    public interface ImageLoader{
+        void loadFromUrl(String url, ImageView imageView);
     }
 
     private void showScrollViewMenu(View scrollViewMenu) {

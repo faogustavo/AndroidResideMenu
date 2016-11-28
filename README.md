@@ -112,6 +112,29 @@ disable a swipe direction
   resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 ```
 
+use icons from iconify:
+```java
+IconDrawable drawable = new IconDrawable(context, FontAwesomeIcons.fa_home)
+                           .colorRes(R.color.ab_icon)
+                           .actionBarSize();
+itemHome = new ResideMenuItem(this, drawable, "Home");
+```
+
+load background from URL:
+```java
+//Use this block on your Application class
+ResideMenu.imageLoader = new ResideMenu.ImageLoader() {
+    @Override
+    public void loadFromUrl(String url, ImageView imageView) {
+        //Exemple of loading from URL with picasso
+        Picasso.with(imageView.getContext()).load(url).into(imageView);
+    }
+};
+
+//and load from a url
+resideMenu.setBackground("some url here");
+```
+
 ## Custom Usage
 
 Do your reside menu configurations, by creating an instance of ResideMenu with your custom layout's resource Ids. If you want to use default layout, just pass that variable as -1.
